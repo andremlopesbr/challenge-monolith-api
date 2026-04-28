@@ -8,9 +8,9 @@ import { initializeDatabase } from "../db/database";
 export const app: Express = express();
 app.use(express.json());
 
+initializeDatabase().catch(console.error);
+
 app.use("/products", productRoute);
 app.use("/clients", clientRoute);
 app.use("/checkout", checkoutRoute);
 app.use("/invoice", invoiceRoute);
-
-initializeDatabase();

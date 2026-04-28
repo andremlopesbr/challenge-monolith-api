@@ -7,8 +7,9 @@ invoiceRoute.get("/:id", async (req: Request, res: Response) => {
   const facade = InvoiceFacadeFactory.create();
   try {
     const output = await facade.find({ id: req.params.id });
-    res.send(output);
+    res.status(200).send(output);
   } catch (err) {
+    console.error("Invoice error:", err);
     res.status(500).send(err);
   }
 });

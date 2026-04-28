@@ -11,8 +11,9 @@ checkoutRoute.post("/", async (req: Request, res: Response) => {
       products: req.body.products,
     };
     const output = await usecase.execute(input);
-    res.send(output);
+    res.status(200).send(output);
   } catch (err) {
+    console.error("Checkout error:", err);
     res.status(500).send(err);
   }
 });

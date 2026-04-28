@@ -22,7 +22,7 @@ export default class InvoiceModel extends Model {
   @Column({ allowNull: false })
   number: string;
 
-  @Column({ allowNull: false })
+  @Column({ allowNull: true })
   complement: string;
 
   @Column({ allowNull: false })
@@ -33,6 +33,9 @@ export default class InvoiceModel extends Model {
 
   @Column({ allowNull: false })
   zipCode: string;
+
+  @Column({ allowNull: false })
+  total: number;
 
   @HasMany(() => InvoiceItemModel)
   items: InvoiceItemModel[];

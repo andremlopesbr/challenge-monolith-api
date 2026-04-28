@@ -15,10 +15,11 @@ export default class InvoiceRepository implements InvoiceGateway {
         document: entity.document,
         street: entity.address.street,
         number: entity.address.number,
-        complement: entity.address.complement,
+        complement: entity.address.complement || "",
         city: entity.address.city,
         state: entity.address.state,
         zipCode: entity.address.zipCode,
+        total: entity.total,
         items: entity.items.map((item) => ({
           id: item.id.id,
           name: item.name,

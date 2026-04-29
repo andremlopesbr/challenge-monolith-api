@@ -46,6 +46,7 @@ describe("E2E API Tests", () => {
     });
 
     expect(response.status).toBe(201);
+    expect(response.body).toEqual({});
   });
 
   it("POST /clients - should create a client", async () => {
@@ -65,6 +66,7 @@ describe("E2E API Tests", () => {
     });
 
     expect(response.status).toBe(201);
+    expect(response.body).toEqual({});
   });
 
   it("POST /checkout - should place an order", async () => {
@@ -72,7 +74,7 @@ describe("E2E API Tests", () => {
       id: "prod-2",
       name: "Product 2",
       description: "Product 2 description",
-      purchasePrice: 50,
+      purchasePrice: 100,
       stock: 20,
     });
 
@@ -96,7 +98,10 @@ describe("E2E API Tests", () => {
     });
 
     expect(response.status).toBe(200);
-    expect(response.body).toHaveProperty("id");
+    expect(response.body.id).toBeDefined();
+    expect(response.body.total).toBe(100);
+    expect(response.body.status).toBe("approved");
+    expect(response.body.invoiceId).toBeDefined();
   });
 
   it("GET /invoice/:id - should get invoice", async () => {
@@ -129,6 +134,19 @@ describe("E2E API Tests", () => {
 
     const invoiceId = checkoutResponse.body.invoiceId;
     const response = await request(app).get(`/invoice/${invoiceId}`);
+
     expect(response.status).toBe(200);
+    expect(response.body.id).toBe(invoiceId);
+    expect(response.body.name).toBe("Client 3");
+    expect(response.body.document).toBe("11111111");
+    expect(response.body.address.street).toBe("Street 3");
+    expect(response.body.address.number).toBe("789");
+    expect(response.body.address.city).toBe("City 3");
+    expect(response.body.address.state).toBe("State 3");
+    expect(response.body.address.zipCode).toBe("11111111");
+    expect(response.body.items).toHaveLength(1);
+    expect(response.body.items[0].name).toBe("Product 3");
+    expect(response.body.items[0].price).toBe(75);
+    expect(response.body.total).toBe(75);
   });
 });

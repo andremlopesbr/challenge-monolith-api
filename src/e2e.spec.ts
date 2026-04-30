@@ -48,7 +48,7 @@ describe("E2E API Tests", () => {
     });
 
     expect(response.status).toBe(201);
-    expect(response.body).toEqual({});
+    expect(response.body.id).toBeDefined();
   });
 
   it("POST /clients - should create a client", async () => {
@@ -68,7 +68,7 @@ describe("E2E API Tests", () => {
     });
 
     expect(response.status).toBe(201);
-    expect(response.body).toEqual({});
+    expect(response.body.id).toBeDefined();
   });
 
   it("POST /checkout - should place an order", async () => {

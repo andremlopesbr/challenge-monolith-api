@@ -3,6 +3,16 @@ import ClientAdmFacadeFactory from "../../../modules/client-adm/factory/client-a
 
 export const clientRoute = express.Router();
 
+clientRoute.get("/", async (req: Request, res: Response) => {
+  const facade = ClientAdmFacadeFactory.create();
+  try {
+    const output = await facade.findAll();
+    res.send(output);
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
+
 clientRoute.post("/", async (req: Request, res: Response) => {
   const facade = ClientAdmFacadeFactory.create();
   try {
@@ -13,8 +23,8 @@ clientRoute.post("/", async (req: Request, res: Response) => {
       document: req.body.document,
       address: req.body.address,
     };
-    await facade.add(input);
-    res.status(201).send();
+    const output = await facade.add(input);
+    res.status(201).json(output);
   } catch (err) {
     res.status(500).send(err);
   }

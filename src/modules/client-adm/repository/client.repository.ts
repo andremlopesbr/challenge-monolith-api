@@ -49,4 +49,24 @@ export default class ClientRepository implements ClientGateway {
       updatedAt: client.createdAt
     })
   }
+
+  async findAll(): Promise<Client[]> {
+    const clients = await ClientModel.findAll();
+    return clients.map(client => new Client({
+      id: new Id(client.id),
+      name: client.name,
+      email: client.email,
+      document: client.document,
+      address: new Address(
+        client.street,
+        client.number,
+        client.complement,
+        client.city,
+        client.state,
+        client.zipcode,
+      ),
+      createdAt: client.createdAt,
+      updatedAt: client.updatedAt
+    }));
+  }
 }

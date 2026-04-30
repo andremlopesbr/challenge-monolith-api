@@ -5,6 +5,7 @@ import OrderModel from "../../modules/checkout/repository/order.model";
 import InvoiceModel from "../../modules/invoice/repository/invoice.model";
 import InvoiceItemModel from "../../modules/invoice/repository/invoice-item.model";
 import TransactionModel from "../../modules/payment/repository/transaction.model";
+import StoreProductModel from "../../modules/store-catalog/repository/product.model";
 
 let _sequelize: Sequelize | null = null;
 
@@ -21,7 +22,8 @@ export async function initializeDatabase(): Promise<Sequelize> {
       OrderModel, 
       InvoiceModel, 
       InvoiceItemModel,
-      TransactionModel
+      TransactionModel,
+      StoreProductModel
     ]);
     await _sequelize.sync({ force: true });
   }

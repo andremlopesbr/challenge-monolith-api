@@ -11,6 +11,7 @@ productRoute.post("/", async (req: Request, res: Response) => {
       name: req.body.name,
       description: req.body.description,
       purchasePrice: req.body.purchasePrice,
+      salesPrice: req.body.salesPrice || req.body.purchasePrice,
       stock: req.body.stock,
     };
     await facade.addProduct(input);

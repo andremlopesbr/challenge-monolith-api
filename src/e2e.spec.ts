@@ -8,6 +8,7 @@ import OrderModel from "./modules/checkout/repository/order.model";
 import InvoiceModel from "./modules/invoice/repository/invoice.model";
 import InvoiceItemModel from "./modules/invoice/repository/invoice-item.model";
 import TransactionModel from "./modules/payment/repository/transaction.model";
+import StoreProductModel from "./modules/store-catalog/repository/product.model";
 
 describe("E2E API Tests", () => {
   let sequelize: Sequelize;
@@ -25,7 +26,8 @@ describe("E2E API Tests", () => {
       OrderModel,
       InvoiceModel,
       InvoiceItemModel,
-      TransactionModel
+      TransactionModel,
+      StoreProductModel
     ]);
 
     const umzug = migrator(sequelize);
